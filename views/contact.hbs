@@ -110,9 +110,6 @@
                             Logout
                         </a>
                         {{else}}
-                        <a href="/register" class=" text-dark text-decoration-none pe-3"> 
-                            Register
-                        </a>
                         <a href="/login" class="text-dark text-decoration-none pe-3">
                             Login
                         </a>
@@ -128,7 +125,7 @@
         <div
             class="container-fluid fluid d-flex justify-content-center align-items-center bg-blue"
         >
-            <div class="container-form">
+            <div class="container-form bg-white p-3 rounded shadow">
                 <h2 class="fw-bold text-center">Get In Touch</h2>
                 <form>
                     <div class="mb-2">
@@ -139,7 +136,7 @@
                         >
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control shadow-sm"
                             id="inputName"
                         />
                     </div>
@@ -152,7 +149,7 @@
                         >
                         <input
                             type="email"
-                            class="form-control"
+                            class="form-control shadow-sm"
                             id="inputEmail"
                         />
                     </div>
@@ -165,7 +162,7 @@
                         >
                         <input
                             type="number"
-                            class="form-control"
+                            class="form-control shadow-sm"
                             id="inputPhoneNumber"
                         />
                     </div>
@@ -177,7 +174,7 @@
                             >Subject</label
                         >
                         <select
-                            class="form-select"
+                            class="form-select shadow-sm"
                             aria-label="Default select example"
                             id="inputSubject"
                         >
@@ -188,14 +185,14 @@
                         </select>
                     </div>
 
-                    <div class="mb-5">
+                    <div class="mb-3">
                         <label
                             for="exampleInputTextarea"
                             class="form-label fw-semibold"
                             >Description</label
                         >
                         <textarea
-                            class="form-control"
+                            class="form-control shadow-sm"
                             id="inputMessage"
                             rows="3"
                         ></textarea>

@@ -21,8 +21,6 @@ app.use(
     })
 );
 
-let isLogin = true;
-
 db.connect(function (err, client, done) {
     if (err) throw err;
     console.log("Database connected....");
@@ -75,7 +73,7 @@ db.connect(function (err, client, done) {
                 data = {
                     title: data.title,
                     image: data.image,
-                    start_date: getTime(data.start_date),
+                    start_date: data.start_date,
                     end_date: data.end_date,
                     nodeJs: data.technologis[0] !== "undefined",
                     reactJs: data.technologis[1] !== "undefined",
@@ -84,8 +82,18 @@ db.connect(function (err, client, done) {
                     description: data.description,
                 };
 
-                console.log(data);
-                res.render("edit-project", { data: data, name: id });
+                let startDate = getTime(new Date(data.start_date));
+                let endDate = getTime(new Date(data.end_date));
+
+                console.log(data, startDate, endDate);
+                res.render("edit-project", {
+                    data: data,
+                    name: id,
+                    startDate,
+                    endDate,
+                    user: req.session.user,
+                    isLogin: req.session.isLogin,
+                });
             }
         );
     });
@@ -106,7 +114,10 @@ db.connect(function (err, client, done) {
     });
 
     app.get("/add-project", function (req, res) {
-        res.render("add-project");
+        res.render("add-project", {
+            user: req.session.user,
+            isLogin: req.session.isLogin,
+        });
     });
 
     app.post("/add-project", function (req, res) {
@@ -153,7 +164,11 @@ db.connect(function (err, client, done) {
                     image: data.image,
                 };
                 console.log(data);
-                res.render("project-detail", { data: data });
+                res.render("project-detail", {
+                    data: data,
+                    user: req.session.user,
+                    isLogin: req.session.isLogin,
+                });
             }
         );
     });
@@ -220,7 +235,7 @@ db.connect(function (err, client, done) {
                     email: result.rows[0].email,
                 };
 
-                req.flash("success", "Login berhasil");
+                req.flash("success", "Login success");
                 res.redirect("/");
             } else {
                 req.flash("warningPass", "Wrong password");
@@ -261,59 +276,13 @@ function getFullTime(waktu) {
 }
 
 function getTime(time) {
-    let month = [
-        "01",
-        "02",
-        "03",
-        "04",
-        "05",
-        "06",
-        "07",
-        "08",
-        "09",
-        "10",
-        "11",
-        "12",
-    ];
-    let date = [
-        "01",
-        "02",
-        "03",
-        "04",
-        "05",
-        "06",
-        "07",
-        "08",
-        "09",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14",
-        "15",
-        "16",
-        "17",
-        "18",
-        "19",
-        "20",
-        "21",
-        "22",
-        "23",
-        "24",
-        "25",
-        "26",
-        "27",
-        "28",
-        "29",
-        "30",
-        "31",
-    ];
+    let month = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 
     let dateIndex = time.getDate();
     let monthIndex = time.getMonth();
     let year = time.getFullYear();
 
-    let fullTime = `${month[monthIndex]}/${date[dateIndex]}/${year}`;
+    let fullTime = `${month[monthIndex]}/${dateIndex}/${year}`;
     return fullTime;
 }
 
@@ -329,7 +298,7 @@ function getDistanceTime(startDate, endDate) {
         distanceMonth <= 0 ? distanceDay + " Hari" : distanceMonth + " Bulan";
 
     if (start > end) {
-        alert("Error Your Date");
+        flash("warning", "Error Your Date");
     } else if (start < end) {
         return `${duration}`;
     }

@@ -92,6 +92,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            {{#if isLogin}}  
                             <a
                                 class="nav-link text-dark"
                                 aria-current="page"
@@ -99,19 +100,17 @@
                             >
                                 Add Project
                             </a>
+                            {{/if}}
                         </li>
                     </ul>
                     <div class="bg-light">
-                         {{#if isLogin}}
+                        {{#if isLogin}}
                         <a class="pe-2 text-decoration-none" style="color: black !important;"> Hai, {{user.name}}
                         </a>
                         <a href="/logout" class="text-dark text-decoration-none pe-3">
                             Logout
                         </a>
                         {{else}}
-                        <a href="/register" class=" text-dark text-decoration-none pe-3"> 
-                            Register
-                        </a>
                         <a href="/login" class="text-dark text-decoration-none pe-3">
                             Login
                         </a>
@@ -156,7 +155,7 @@
                                 class="form-control shadow-sm"
                                 id="inputStartDate"
                                 name="startDateProject"
-                                value={{data.startDate}}
+                                value={{startDate}}
                             />
                         </div>
                         <div class="col">
@@ -170,7 +169,7 @@
                                 class="form-control shadow-sm"
                                 id="inputEndDate"
                                 name="endDateProject"
-                                value={{data.endDate}}
+                                value={{endDate}}
                             />
                         </div>
                     </div>
