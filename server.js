@@ -170,11 +170,22 @@ db.connect(function (err, client, done) {
         let { inputName, inputEmail, inputPassword } = req.body;
         const hashedPassword = bcrypt.hashSync(inputPassword, 10);
 
-        const insertReq = `INSERT INTO tb_users (name, email, password) VALUES ('${inputName}', '${inputEmail}', '${hashedPassword}');`;
-
-        client.query(insertReq, function (err, result) {
+        // View the same email
+        const cekEmail = `SELECT * FROM tb_users WHERE email='${inputEmail}'`;
+        client.query(cekEmail, function (err, result) {
             if (err) throw err;
-            res.redirect("/login");
+
+            if (result.rows.length != 0) {
+                req.flash("warning", "Email is already registered");
+                return res.redirect("/register");
+            }
+
+            // Add Account
+            const insertReq = `INSERT INTO tb_users (name, email, password) VALUES ('${inputName}', '${inputEmail}', '${hashedPassword}');`;
+            client.query(insertReq, function (err, result) {
+                if (err) throw err;
+                res.redirect("/login");
+            });
         });
         done;
     });
@@ -192,7 +203,7 @@ db.connect(function (err, client, done) {
             if (err) throw err;
 
             if (result.rows.length == 0) {
-                req.flash("warning", "Email belum terdaftar");
+                req.flash("warningEmail", "Email not registered");
                 return res.redirect("/login");
             }
 
@@ -212,7 +223,7 @@ db.connect(function (err, client, done) {
                 req.flash("success", "Login berhasil");
                 res.redirect("/");
             } else {
-                req.flash("warning", "Password salah");
+                req.flash("warningPass", "Wrong password");
                 res.redirect("login");
             }
         });
