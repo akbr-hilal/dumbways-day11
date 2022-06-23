@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Home Page</title>
+
+        <!-- My Style -->
+        <link rel="stylesheet" href="../assets/css/style.css" />
+
+        <!-- Bootstrap Style -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+            crossorigin="anonymous"
+        />
+
+        <!-- Font Style -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+            integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+            integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+            integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg bg-light sticky-top">
+            <div class="container-lg bg-light pb-1">
+                <a class="navbar-brand" href="/"
+                    ><img
+                        src="../assets/img/brandred.png"
+                        alt="logo"
+                        height="32"
+                    />
+                </a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div
+                    class="collapse navbar-collapse"
+                    id="navbarSupportedContent"
+                >
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-light">
+                        <li class="nav-item">
+                            <a class="nav-link text-orange" aria-current="page" href="/">
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                          {{#if isLogin}}  
+                            <a
+                                class="nav-link text-dark"
+                                aria-current="page"
+                                href="/add-project"
+                            >
+                                Add Project
+                            </a>
+                            {{/if}}
+                        </li>
+                    </ul>
+
+                    <div class="bg-light">
+                        {{#if isLogin}}
+                        <a class="pe-2 text-decoration-none" style="color: black !important;"> Hai, {{user.name}}
+                        </a>
+                        <a href="/logout" class="text-dark text-decoration-none pe-3">
+                            Logout
+                        </a>
+                        {{else}}
+                        <a href="/login" class="text-dark text-decoration-none pe-3">
+                            Login
+                        </a>
+                        {{/if}}
+                        <a href="/contact" target="_blank"><button class="btn btn-dark text-white" type="submit">
+                            Contact Me
+                        </button></a>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid d-lg-flex justify-content-center align-items-center bg-blue p-5">
+            <div class="container-xl">
+         {{#if messages.success}}
+              <div class="alert alert-success d-flex alert-dismissible fade show" role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                         <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                        </symbol>
+                    </svg>
+                    <svg class="me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                    <div>
+                        {{messages.success}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            {{/if}}
+                <div class="d-lg-flex rounded shadow p-sm-4 p-lg-5 mt-lg-0 justify-content-lg-center p-3 bg-white">
+                    <div class="container-content pe-lg-5 mb-3 mb-lg-0" >
+                        <p class="h2 mb-3 fw-bold text-lg-start text-center">Hi, Welcome to My Website
+                            
+                        <p class="mb-5">
+                            I am Hilal, now I am a S1 student of Information
+                            Systems at the Indonesian Open University. I'm
+                            interested in UI/UX Design and FullStack. I am
+                            proficient in using Figma software. Apart from that,
+                            I am also proficient with illustrator tools like
+                            Adobe Illustrator. I also have communication, design
+                            thinking and problem solving skills. I'm currently
+                            studying FullStack Developer at DumbWays Indonesia
+                        </p>
+                        </p>
+                        <div class="py-2 text-lg-start text-center">
+                            <a
+                                href="/contact"
+                                class="btn btn-dark py-1 px-3 rounded-pill text-white text-decoration-none"
+                                >Contact</a
+                            >
+                            <a
+                                href="../assets/doc/CV Hilal Akbar.pdf"
+                                class="text-dark text-decoration-none ms-3"
+                                >Download CV
+                                <img
+                                    src="../assets/img/arrow_download_icon.png"
+                                    alt=""
+                                    height="20"
+                            /></a>
+                        </div>
+                        <div class="media text-lg-start text-center">
+                            <span class="fa-stack">
+                                <i
+                                    class="fa-solid fa-circle fa-stack-2x text-center"
+                                ></i>
+                                <a
+                                    href="https://www.linkedin.com/in/hilal-akbar/"
+                                    target="_blank"
+                                >
+                                    <i
+                                        class="fa-brands fa-linkedin-in fa-stack-1x fa-inverse"
+                                    ></i>
+                                </a>
+                            </span>
+                            <span class="fa-stack">
+                                <i class="fa-solid fa-circle fa-stack-2x"></i>
+                                <a
+                                    href="https://github.com/akbr-hilal"
+                                    target="_blank"
+                                >
+                                    <i
+                                        class="fa-brands fa-github fa-stack-1x fa-inverse"
+                                    ></i>
+                                </a>
+                            </span>
+                            <span class="fa-stack">
+                                <i class="fa-solid fa-circle fa-stack-2x"></i>
+                                <a
+                                    href="https://www.facebook.com/akbrhilal/"
+                                    target="_blank"
+                                >
+                                    <i
+                                        class="fa-brands fa-facebook-f fa-stack-1x fa-inverse"
+                                    ></i>
+                                </a>
+                            </span>
+                            <span class="fa-stack">
+                                <i class="fa-solid fa-circle fa-stack-2x"></i>
+                                <a
+                                    href="https://www.instagram.com/akbr_hilal/"
+                                    target="_blank"
+                                >
+                                    <i
+                                        class="fa-brands fa-instagram fa-stack-1x fa-inverse"
+                                    ></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card rounded shadow mx-auto mx-lg-0" style="width: 18rem">
+                        <img
+                            src="../assets/img/IMG_4222.jpg"
+                            class="card-img-top rounded-top"
+                            alt="My Photo"
+                        />
+                        <div class="card-body">
+                            <h3 class="card-title text-center">Hilal Akbar</h3>
+                            <p class="card-text text-center">
+                                UI/UX Designer <br />
+                                FullStack Developer
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid2 mt-lg-5 ">
+            <div class="pt-4 mt-5">
+                <p class="h2 text-center fw-bold mb-5 "> My Project </p>
+                <div class="container-lg bg-white d-flex">
+                    <div class="row row-cols-md-3 row-cols-1">
+                        {{#each projects}}  
+                        <div class="col">
+                            <div class="card bg-light mb-5 p-0 mx-auto mx-md-0">
+                                <img
+                                    src="../assets/img/uplabs.png"
+                                    class="card-img-top"
+                                    alt=""
+                                />
+                                <div class="card-body">
+                                    <a href="/project-detail/{{this.id}}" class="text-decoration-none">
+                                    <h5 class="card-title m-0 p-0 text-dark">{{this.title}} </h5>
+                                    </a>
+                                    <p class="mb-3"><small>Durasi : {{this.duration}}</small></p>
+                                    <p class="card-text mb-4">
+                                        {{this.description}}
+                                        
+                                    </p>
+                                </div>
+                                <div class="card-body">
+                                    <i class="{{this.technologis.[0]}}"></i> 
+                                    <i class="{{this.technologis.[1]}}"></i> 
+                                    <i class="{{this.technologis.[2]}}"></i> 
+                                    <i class="{{this.technologis.[3]}}"></i>
+                                </div>
+
+                                {{#if isLogin}}
+                                    <div class="gap-2 d-lg-flex mb-3 justify-content-center align-items-center">
+                                        <a href="/edit-project/{{id}}" class="btn btn-dark text-decoration-none col-lg-5 d-block mb-lg-0 col-10 mb-3 ms-4 ms-md-0" type="button">
+                                            Edit
+                                        </a>
+                                        <a href="/del-project/{{id}}" class="btn btn-dark text-decoration-none col-lg-5 d-block col-10 ms-4 ms-md-0" type="button">
+                                            Delete
+                                        </a>
+                                    </div>
+                                {{/if}}
+    
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- My JS -->
+
+        <!-- Bootstrap JS -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>

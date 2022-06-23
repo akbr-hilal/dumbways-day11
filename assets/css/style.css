@@ -1,0 +1,114 @@
+*{
+  /* background-color: red; */
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+}
+
+::-webkit-scrollbar-track{
+    background: #ced4da;
+}
+
+::-webkit-scrollbar-thumb{
+    background: #000000;
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px grey;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: orangered;
+}
+
+nav{
+    height: 8vh;
+}
+
+.bg-blue{
+    background-color: rgb(228, 228, 228);
+}
+
+.container-fluid{
+  height: 92vh;
+}
+
+.container-content{
+    max-width: 768px;
+  text-align: justify;
+}
+
+.container-fluid2{
+    height: 100vh;
+}
+
+.text-orange{
+    font-weight: 700 !important;
+    color: orangered !important;
+}
+
+.btn-dark:hover{
+    background-color: orangered !important;
+    border: 1px solid orangered !important;
+}
+
+.text-dark:hover{
+  font-weight: 700;
+  color: orangered !important;
+}
+
+.media{   
+  padding-top: 60px;
+}
+
+.media img{
+  width: 40px;
+  margin-right: 24px;
+}
+
+.fa-stack{
+  font-size: 24px;
+  vertical-align: middle;
+}
+.fa-stack:hover{
+  color: orangered;
+}
+
+i{
+  vertical-align: middle;
+}
+
+/* Project List */
+.card{
+    min-width: 20rem;
+}
+.card img{
+    width: 100%;
+    object-fit: cover;
+}
+
+.card .card-body{
+    text-align: justify;
+}
+
+.card .card-body i{
+    font-size: 24px;
+    font-weight: 500;
+}
+
+div .row .row-cols-md-2 .row-cols-sm-1 .row-cols-lg-3{
+    margin: 0 !important;
+}
+
+@media (max-width: 992px){
+    .card{
+        max-width: 20rem;
+    }
+    .container-fluid{
+        height: 170vh;
+    }
+    .container-content{
+        max-width: 600px;
+    }
+}

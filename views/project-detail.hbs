@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Project Detail</title>
+
+        <!-- My Style -->
+        <link rel="stylesheet" href="../assets/css/style.css" />
+        <link rel="stylesheet" href="../assets/css/project-detail.css">
+
+        <!-- Bootstrap Style -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+            crossorigin="anonymous"
+        />
+
+        <!-- Font Style -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+            integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+            integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+            integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg bg-light sticky-top">
+            <div class="container-lg bg-light pb-1">
+                <a class="navbar-brand" href="/"
+                    ><img
+                        src="../assets/img/brandred.png"
+                        alt="logo"
+                        height="32"
+                    />
+                </a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div
+                    class="collapse navbar-collapse"
+                    id="navbarSupportedContent"
+                >
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-light">
+                        <li class="nav-item">
+                            <a
+                                class="nav-link text-dark"
+                                aria-current="page"
+                                href="/"
+                            >
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            {{#if isLogin}}  
+                            <a
+                                class="nav-link text-dark"
+                                aria-current="page"
+                                href="/add-project"
+                            >
+                                Add Project
+                            </a>
+                            {{/if}}
+                        </li>
+                    </ul>
+                    <div class="bg-light">
+                         {{#if isLogin}}
+                        <a class="pe-2 text-decoration-none" style="color: black !important;"> Hai, {{user.name}}
+                        </a>
+                        <a href="/logout" class="text-dark text-decoration-none pe-3">
+                            Logout
+                        </a>
+                        {{else}}
+                        <a href="/register" class=" text-dark text-decoration-none pe-3"> 
+                            Register
+                        </a>
+                        <a href="/login" class="text-dark text-decoration-none pe-3">
+                            Login
+                        </a>
+                        {{/if}}
+                        <a href="/contact" target="_blank"
+                            ><button
+                                class="btn btn-dark text-white"
+                                type="submit"
+                            >
+                                Contact Me
+                            </button></a
+                        >
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="container-fluid bg-blue">
+            <div class="container-lg">
+                <div>
+                    <h3 class="text-center py-3 fw-bold">{{data.title}}</h3>
+                </div>
+                <div class="d-md-block d-lg-flex ">
+                    <div class="col-6 d-flex"> 
+                        <img src="../assets/img/uplabs.png" alt="" class="img-thumbnail mx-auto">
+                    </div>
+                    <div class="ms-4 container">
+                        <h3>Duration</h3>
+                        <div class="duration">
+                            <p class="calender">
+                                <i class="fa-solid fa-calendar-days"></i> {{data.start_date}} - {{data.end_date}}
+                            </p>
+                            <p class="range">
+                                <i class="fa-solid fa-clock"></i> {{data.duration}}
+                            </p>
+                        </div> 
+                        <h3>Technnologies</h3>
+                        <div class="technologis">
+                            <div class="technologis-left d-flex row-cols-lg-2 row-cols-1 flex-wrap mb-1">
+                                {{#if data.nodeJs}}
+                                    <span class="col py-2">
+                                        <i class="fa-brands fa-node-js"></i>Node Js
+                                    </span>
+                                {{/if}}
+                                {{#if data.reactJs }}
+                                    <span class="col py-2">
+                                        <i class="fa-brands fa-react"></i>React Js
+                                    </span>
+                                {{/if}}
+                                {{#if data.angularJs }}
+                                    <span class="col py-2">
+                                        <i class="fa-brands fa-angular"></i> Angular Js
+                                    </span>
+                                {{/if}}                                 
+                                {{#if data.laravel }}
+                                    <span class="col py-2">
+                                        <i class="fa-brands fa-laravel"></i> Laravel
+                                    </span>
+                                {{/if}}
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-description mt-4">
+                <p>
+                    {{data.description}}
+                </p>
+            </div>
+        </div>
+
+
+        <!-- Bootstrap JS -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
