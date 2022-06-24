@@ -25,6 +25,7 @@ db.connect(function (err, client, done) {
     if (err) throw err;
     console.log("Database connected....");
 
+    // Render Home
     app.get("/", function (req, res) {
         client.query("SELECT * FROM tb_project", function (err, result) {
             if (err) throw err;
@@ -49,6 +50,7 @@ db.connect(function (err, client, done) {
         });
     });
 
+    // Render Del Project
     app.get("/del-project/:id", function (req, res) {
         let delQuery = `DELETE FROM tb_project WHERE id = ${req.params.id}`;
 
@@ -60,6 +62,7 @@ db.connect(function (err, client, done) {
         done;
     });
 
+    // Render Edit Project
     app.get("/edit-project/:id", function (req, res) {
         let id = req.params.id;
         console.log(id);
@@ -81,16 +84,10 @@ db.connect(function (err, client, done) {
                     laravel: data.technologis[3] !== "undefined",
                     description: data.description,
                 };
-
-                let startDate = getTime(new Date(data.start_date));
-                let endDate = getTime(new Date(data.end_date));
-
-                console.log(data, startDate, endDate);
+                console.log(data);
                 res.render("edit-project", {
                     data: data,
                     name: id,
-                    startDate,
-                    endDate,
                     user: req.session.user,
                     isLogin: req.session.isLogin,
                 });
@@ -98,6 +95,7 @@ db.connect(function (err, client, done) {
         );
     });
 
+    // Post Edit Project
     app.post("/edit-project/:id", function (req, res) {
         let id = req.params.id;
         let data = req.body;
@@ -113,6 +111,7 @@ db.connect(function (err, client, done) {
         done;
     });
 
+    // Render Add Project
     app.get("/add-project", function (req, res) {
         res.render("add-project", {
             user: req.session.user,
@@ -120,6 +119,7 @@ db.connect(function (err, client, done) {
         });
     });
 
+    // Post Add Project
     app.post("/add-project", function (req, res) {
         let data = req.body;
 
@@ -137,6 +137,7 @@ db.connect(function (err, client, done) {
         done;
     });
 
+    // Render Project Detail
     app.get("/project-detail/:id", function (req, res) {
         let id = req.params.id;
 
@@ -150,8 +151,8 @@ db.connect(function (err, client, done) {
                 data = {
                     title: data.title,
                     image: data.image,
-                    start_date: getFullTime(data.start_date),
-                    end_date: getFullTime(data.end_date),
+                    start_date: getFullTime(new Date(data.start_date)) ,
+                    end_date: getFullTime(new Date(data.end_date)),
                     duration: getDistanceTime(
                         new Date(data.start_date),
                         new Date(data.end_date)
@@ -173,14 +174,17 @@ db.connect(function (err, client, done) {
         );
     });
 
+    // Render Contact
     app.get("/contact", function (req, res) {
         res.render("contact");
     });
 
+    // Render Register
     app.get("/register", function (req, res) {
         res.render("register");
     });
 
+    // Post Register
     app.post("/register", function (req, res) {
         let { inputName, inputEmail, inputPassword } = req.body;
         const hashedPassword = bcrypt.hashSync(inputPassword, 10);
@@ -205,10 +209,12 @@ db.connect(function (err, client, done) {
         done;
     });
 
+    // Render Login
     app.get("/login", function (req, res) {
         res.render("login");
     });
 
+    // Post Login
     app.post("/login", function (req, res) {
         let { inputEmail, inputPassword } = req.body;
 
@@ -244,6 +250,7 @@ db.connect(function (err, client, done) {
         });
     });
 
+    // Render Logout
     app.get("/logout", function (req, res) {
         req.session.destroy();
 
@@ -272,17 +279,6 @@ function getFullTime(waktu) {
     let year = waktu.getFullYear();
 
     let fullTime = `${date} ${month[monthIndex]} ${year}`;
-    return fullTime;
-}
-
-function getTime(time) {
-    let month = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
-
-    let dateIndex = time.getDate();
-    let monthIndex = time.getMonth();
-    let year = time.getFullYear();
-
-    let fullTime = `${month[monthIndex]}/${dateIndex}/${year}`;
     return fullTime;
 }
 
